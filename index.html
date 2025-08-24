@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 피드백 시스템</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <div id="auth-page" class="page">
+            <div class="auth-container">
+                <h1>AI 피드백 시스템</h1>
+                <div class="tabs">
+                    <button class="tab-link active" onclick="openTab(event, 'login')">로그인</button>
+                    <button class="tab-link" onclick="openTab(event, 'signup')">회원가입</button>
+                </div>
+
+                <div id="login" class="tab-content" style="display: block;">
+                    <form id="login-form">
+                        <input type="email" id="login-email" placeholder="이메일" required>
+                        <input type="password" id="login-password" placeholder="비밀번호" required>
+                        <button type="submit">로그인</button>
+                    </form>
+                </div>
+
+                <div id="signup" class="tab-content">
+                    <form id="signup-form">
+                        <input type="text" id="signup-name" placeholder="이름" required>
+                        <input type="email" id="signup-email" placeholder="사용할 이메일" required>
+                        <input type="password" id="signup-password" placeholder="사용할 비밀번호" required>
+                        <button type="submit">회원가입</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="main-page" class="page" style="display: none;">
+            <aside class="sidebar">
+                <h2>안녕하세요!</h2>
+                <button id="logout-btn">로그아웃</button>
+            </aside>
+            <main id="content-area">
+                <div id="student-management-page" class="content-page">
+                    <header>
+                        <h1>학생 관리</h1>
+                    </header>
+                    <details class="expander">
+                        <summary>신규 학생 추가하기</summary>
+                        <form id="new-student-form">
+                            <input type="text" id="new-student-name" placeholder="학생 이름" required>
+                            <select id="new-student-grade" required></select>
+                            <button type="submit">추가</button>
+                        </form>
+                    </details>
+                    <hr>
+                    <div id="student-list">
+                        </div>
+                </div>
+
+                <div id="feedback-management-page" class="content-page" style="display: none;">
+                    <header>
+                        <button id="back-to-students">◀ 학생 목록으로 돌아가기</button>
+                        <h1 id="feedback-page-title"></h1>
+                    </header>
+                    <details class="expander">
+                        <summary>신규 피드백 생성하기</summary>
+                        <form id="new-feedback-form">
+                            <h3>수업 정보</h3>
+                            <input type="text" id="fb-subject" placeholder="과목" required>
+                            <input type="date" id="fb-class-date" required>
+                            <textarea id="fb-progress" placeholder="수업 진도" rows="3"></textarea>
+                            <textarea id="fb-memo" placeholder="수업 메모" rows="3"></textarea>
+                            
+                            <h3>평가 점수</h3>
+                            <div class="slider-group">
+                                <label for="fb-attitude">수업 태도: <span id="attitude-value">3</span></label>
+                                <input type="range" id="fb-attitude" min="1" max="5" value="3">
+                            </div>
+                            <div class="slider-group">
+                                <label for="fb-understanding">이해도: <span id="understanding-value">3</span></label>
+                                <input type="range" id="fb-understanding" min="1" max="5" value="3">
+                            </div>
+                            <div class="slider-group">
+                                <label for="fb-homework">과제 수행도: <span id="homework-value">3</span></label>
+                                <input type="range" id="fb-homework" min="1" max="5" value="3">
+                            </div>
+                            <div class="slider-group">
+                                <label for="fb-qa">질의응답: <span id="qa-value">3</span></label>
+                                <input type="range" id="fb-qa" min="1" max="5" value="3">
+                            </div>
+                            <button type="submit">AI 피드백 생성</button>
+                        </form>
+                    </details>
+                     <hr>
+                    <h2>피드백 기록</h2>
+                    <div id="feedback-list">
+                        </div>
+                </div>
+            </main>
+        </div>
+
+        <div id="loading-spinner" class="spinner-overlay" style="display: none;">
+            <div class="spinner"></div>
+            <p>AI가 피드백을 생성 중입니다...</p>
+        </div>
+
+        <div id="toast-message" class="toast"></div>
+
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
