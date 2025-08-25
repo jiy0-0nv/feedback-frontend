@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // --- API 클라이언트 ---
-    const BASE_URL = "https://27th-project-feedback.duckdns.org/";
+    const BASE_URL = "http://127.0.0.1:8000";
 
     class ApiClient {
         async _request(method, endpoint, body = null, isFormData = false) {
