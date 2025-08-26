@@ -276,6 +276,11 @@ document.addEventListener('DOMContentLoaded', () => {
         sidebar.classList.add('open');
         sidebarOverlay.classList.add('active');
     }
+    
+    function closeSidebar() {
+        sidebar.classList.remove('open');
+        sidebarOverlay.classList.remove('active');
+    }
 
     // --- 이벤트 리스너 ---
     

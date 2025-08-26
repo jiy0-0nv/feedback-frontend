@@ -195,6 +195,12 @@ button[type="submit"] {
     color: var(--light-text-color);
 }
 
+.close-btn:focus {
+    outline: none;
+    box-shadow: none;
+    background: none;
+}
+
 .sidebar h2 {
     margin-bottom: 0;
     font-size: 18px;
