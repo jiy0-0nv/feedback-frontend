@@ -34,33 +34,34 @@ body {
 
 /* --- 로그인/회원가입 페이지 --- */
 .auth-container {
-    max-width: 400px;
-    margin: 100px auto;
-    padding: 40px;
+    max-width: 90%;
+    margin: 40px auto;
+    padding: 20px;
     background: var(--card-bg-color);
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     text-align: center;
 }
 
 .auth-container h1 {
-    margin-bottom: 24px;
+    margin-bottom: 16px;
+    font-size: 24px;
     color: var(--primary-color);
 }
 
 .tabs {
     display: flex;
-    margin-bottom: 24px;
+    margin-bottom: 16px;
     border-bottom: 2px solid var(--border-color);
 }
 
 .tab-link {
     flex: 1;
-    padding: 12px;
+    padding: 10px;
     border: none;
     background: none;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 500;
     color: var(--light-text-color);
     transition: all 0.3s ease;
@@ -78,7 +79,7 @@ body {
 form {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 10px;
 }
 
 input[type="text"],
@@ -88,10 +89,10 @@ input[type="date"],
 select,
 textarea {
     width: 100%;
-    padding: 12px;
+    padding: 10px;
     border: 1px solid var(--border-color);
     border-radius: 4px;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 textarea {
@@ -99,12 +100,12 @@ textarea {
 }
 
 button {
-    padding: 12px;
+    padding: 10px;
     border: none;
     border-radius: 4px;
     background-color: var(--primary-color);
     color: white;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -113,6 +114,10 @@ button {
 button:hover {
     background-color: #357ABD;
 }
+button:active {
+    background-color: #2A64A5;
+}
+
 
 button[type="submit"] {
     margin-top: 8px;
@@ -121,25 +126,31 @@ button[type="submit"] {
 /* --- 메인 페이지 --- */
 #main-page {
     display: flex;
+    flex-direction: column;
     height: 100vh;
 }
 
 .sidebar {
-    width: 250px;
+    width: 100%;
     background-color: var(--card-bg-color);
-    padding: 24px;
+    padding: 16px;
     border-right: 1px solid var(--border-color);
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .sidebar h2 {
-    margin-bottom: auto;
+    margin-bottom: 0;
+    font-size: 18px;
     color: var(--primary-color);
 }
 
 #logout-btn {
     background-color: var(--danger-color);
+ padding: 8px 12px;
+ font-size: 14px;
 }
 #logout-btn:hover {
     background-color: #c82333;
@@ -148,33 +159,37 @@ button[type="submit"] {
 
 #content-area {
     flex: 1;
-    padding: 32px;
+    padding: 16px;
     overflow-y: auto;
 }
 
 #content-area header {
     display: flex;
     align-items: center;
-    gap: 16px;
-    margin-bottom: 24px;
+    gap: 8px;
+    margin-bottom: 16px;
 }
 
 #back-to-students {
     background: none;
     border: 1px solid var(--border-color);
     color: var(--text-color);
-    padding: 8px 12px;
-    font-size: 14px;
+    padding: 6px 10px;
+    font-size: 12px;
 }
 #back-to-students:hover {
     background-color: var(--background-color);
 }
 
+#content-area header h1 {
+ font-size: 20px; /* 폰트 크기 줄임 */
+ margin: 0;
+}
 
 hr {
     border: none;
     border-top: 1px solid var(--border-color);
-    margin: 24px 0;
+    margin: 16px 0;
 }
 
 /* --- 학생/피드백 카드 --- */
@@ -182,39 +197,42 @@ hr {
     background: var(--card-bg-color);
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 16px;
+    padding: 26px;
+    margin-bottom: 12px;
 }
 
 .student-card-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
 }
 
 .student-card-header h3 {
     margin: 0;
+    font-size: 16px;
 }
 .student-card-header h3 span {
     font-weight: 400;
     color: var(--light-text-color);
-    font-size: 0.9em;
+    font-size: 0.8em;
 }
 
 .student-card-header .actions button {
-    font-size: 14px;
-    padding: 8px 16px;
+    font-size: 12px;
+    padding: 6px 10px;
 }
 
 .edit-form .form-actions {
     display: flex;
-    gap: 10px;
-    margin-top: 16px;
+    gap: 8px;
+    margin-top: 12px;
+    flex-direction: column;
 }
 
 .edit-form .form-actions button {
-    flex: 1;
+    flex: none; /* 자동 너비 조정 해제 */
+    width: 100%;
 }
 
 .edit-form .form-actions .delete-btn {
@@ -227,8 +245,8 @@ hr {
 .expander, .collapsible {
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    padding: 16px;
-    margin-bottom: 16px;
+    padding: 12px;
+    margin-bottom: 12px;
 }
 .expander[open], .collapsible[open] {
     padding-bottom: 24px;
@@ -236,52 +254,55 @@ hr {
 summary {
     cursor: pointer;
     font-weight: 500;
-    font-size: 1.1em;
+    font-size: 14px;
 }
 summary::marker {
     color: var(--primary-color);
 }
 
 .feedback-item {
-    padding: 12px;
+    padding: 10px;
     border-radius: 6px;
-    margin-top: 8px;
+    margin-top: 6px;
 }
 .feedback-item h4 {
     margin-bottom: 4px;
+    font-size: 14px;
 }
 .feedback-improvement {
     background-color: #e6f7ff;
-    border-left: 4px solid #1890ff;
+    border-left: 3px solid #1890ff;
 }
 .feedback-attitude {
-     background-color: #fffbe6;
-    border-left: 4px solid #faad14;
+    background-color: #fffbe6;
+    border-left: 3px solid #faad14;
 }
 .feedback-overall {
     background-color: #f6ffed;
-    border-left: 4px solid #52c41a;
+    border-left: 3px solid #52c41a;
 }
 
 
 /* --- 피드백 생성 폼 --- */
 #new-feedback-form h3 {
-    margin-top: 24px;
-    margin-bottom: 16px;
+    margin-top: 16px;
+    margin-bottom: 10px;
     color: var(--primary-color);
     border-bottom: 1px solid var(--border-color);
-    padding-bottom: 8px;
+    padding-bottom: 6px;
+    font-size: 16px;
 }
 #new-feedback-form h3:first-child {
     margin-top: 0;
 }
 
 .slider-group {
-    margin-bottom: 16px;
+    margin-bottom: 12px;
 }
 .slider-group label {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
+    font-size: 14px;
 }
 .slider-group input[type="range"] {
     width: 100%;
@@ -307,16 +328,17 @@ summary::marker {
     align-items: center;
     z-index: 1000;
     color: white;
+    font-size: 16px;
 }
 
 .spinner {
-    border: 4px solid rgba(255, 255, 255, 0.3);
+    border: 3px solid rgba(255, 255, 255, 0.3);
     border-radius: 50%;
-    border-top: 4px solid #fff;
-    width: 40px;
-    height: 40px;
+    border-top: 3px solid #fff;
+    width: 30px;
+    height: 30px;
     animation: spin 1s linear infinite;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
 }
 
 @keyframes spin {
@@ -326,20 +348,47 @@ summary::marker {
 
 .toast {
     position: fixed;
-    bottom: 20px;
+    bottom: 10px;
     left: 50%;
     transform: translateX(-50%);
-    padding: 12px 24px;
+    padding: 10px 20px;
     background-color: #333;
     color: white;
-    border-radius: 25px;
+    border-radius: 20px;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.5s, visibility 0.5s, bottom 0.5s;
+    transition: opacity 0.3s, visibility 0.3s, bottom 0.3s;
+    font-size: 14px;
 }
 
 .toast.show {
     opacity: 1;
     visibility: visible;
-    bottom: 40px;
+    bottom: 30px;
+}
+
+/* --- 미디어 쿼리 (작은 화면) --- */
+@media (max-width: 600px) {
+    .sidebar {
+    flex-direction: column; /* 세로로 재배치 */
+    align-items: stretch; /* 전체 너비 사용 */
+    }
+
+
+    .sidebar h2 {
+    margin-bottom: 10px; /* 하단 마진 추가 */
+    text-align: center; /* 가운데 정렬 */
+    }
+
+
+    #logout-btn {
+    width: 100%; /* 전체 너비 사용 */
+    }
+
+
+    #content-area header {
+    flex-direction: column; /* 세로로 재배치 */
+    align-items: flex-start; /* 왼쪽 정렬 */
+    gap: 10px; /* 간격 조정 */
+    }
 }
