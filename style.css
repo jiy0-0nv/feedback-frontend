@@ -238,6 +238,7 @@ button[type="submit"] {
     color: var(--text-color);
     padding: 6px 10px;
     font-size: 12px;
+    margin-left: auto;
 }
 #back-to-students:hover {
     background-color: var(--background-color);
