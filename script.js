@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const state = {
         token: localStorage.getItem('token'),
         currentUser: JSON.parse(localStorage.getItem('currentUser')),
-        currentPage: 'auth', // 'auth', 'students', 'feedback'
+        currentPage: 'auth',
         selectedStudentId: null,
         selectedStudentName: null,
         grades: [],
@@ -221,18 +221,29 @@ document.addEventListener('DOMContentLoaded', () => {
             const classDate = studentMap[fb.feedback_id] || '날짜 정보 없음';
             const card = document.createElement('details');
             card.className = 'collapsible feedback-card';
+            card.setAttribute('open', ''); // 기본적으로 펼쳐진 상태로
+            
             card.innerHTML = `
                 <summary>${classDate} 수업 피드백</summary>
                 <div class="feedback-item feedback-improvement">
-                    <h4>👍 발전한 점</h4>
+                    <div class="feedback-item-header">
+                        <h4>👍 발전한 점</h4>
+                        <button class="copy-btn">복사</button>
+                    </div>
                     <p>${fb.ai_comment_improvement || '내용 없음'}</p>
                 </div>
                 <div class="feedback-item feedback-attitude">
-                    <h4>💪 개선할 점</h4>
+                    <div class="feedback-item-header">
+                        <h4>💪 개선할 점</h4>
+                        <button class="copy-btn">복사</button>
+                    </div>
                     <p>${fb.ai_comment_attitude || '내용 없음'}</p>
                 </div>
                 <div class="feedback-item feedback-overall">
-                    <h4>📝 총평</h4>
+                    <div class="feedback-item-header">
+                        <h4>📝 총평</h4>
+                        <button class="copy-btn">복사</button>
+                    </div>
                     <p>${fb.ai_comment_overall || '내용 없음'}</p>
                 </div>
             `;
@@ -276,7 +287,7 @@ document.addEventListener('DOMContentLoaded', () => {
         sidebar.classList.add('open');
         sidebarOverlay.classList.add('active');
     }
-    
+
     function closeSidebar() {
         sidebar.classList.remove('open');
         sidebarOverlay.classList.remove('active');
@@ -453,6 +464,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 slider.dispatchEvent(new Event('input'));
             });
             renderFeedbackManagementPage();
+        }
+    });
+
+    // 복사 버튼 처리
+    document.getElementById('feedback-list').addEventListener('click', (e) => {
+        // 클릭된 요소가 'copy-btn' 클래스를 가지고 있는지 확인
+        if (e.target.classList.contains('copy-btn')) {
+            const button = e.target;
+            // 버튼의 부모(.feedback-item-header)의 다음 형제 요소(<p>)를 찾음
+            const textToCopy = button.parentElement.nextElementSibling.textContent;
+
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                // 복사 성공 시 토스트 메시지 표시
+                showToast('✅ 클립보드에 복사되었습니다!');
+            }).catch(err => {
+                // 복사 실패 시 오류 메시지 표시
+                console.error('클립보드 복사 실패:', err);
+                showToast('❌ 복사에 실패했습니다.', 'error');
+            });
         }
     });
 
