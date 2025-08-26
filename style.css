@@ -218,9 +218,17 @@ button[type="submit"] {
 
 #content-area header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     gap: 8px;
-    margin-bottom: 16px;
+    margin-bottom: 24px;
+    width: 100%;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px; /* 메뉴 버튼과 제목 사이의 간격 */
 }
 
 #menu-btn, #menu-btn-feedback {
@@ -238,7 +246,6 @@ button[type="submit"] {
     color: var(--text-color);
     padding: 6px 10px;
     font-size: 12px;
-    margin-left: auto;
 }
 #back-to-students:hover {
     background-color: var(--background-color);
