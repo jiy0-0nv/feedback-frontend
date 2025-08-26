@@ -326,10 +326,22 @@ summary::marker {
     padding: 10px;
     border-radius: 6px;
     margin-top: 6px;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.7;
 }
 .feedback-item h4 {
     margin-bottom: 4px;
     font-size: 14px;
+}
+.feedback-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+.feedback-item-header h4 {
+    margin: 0; /* 기존 h4 마진 제거 */
 }
 .feedback-improvement {
     background-color: #e6f7ff;
@@ -342,6 +354,26 @@ summary::marker {
 .feedback-overall {
     background-color: #f6ffed;
     border-left: 3px solid #52c41a;
+}
+
+/* 복사 버튼 스타일 */
+.copy-btn {
+    background-color: #eef1f5;
+    color: var(--light-text-color);
+    border: none;
+    padding: 4px 10px;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.copy-btn:hover {
+    background-color: #dbe0e8;
+}
+
+.copy-btn:active {
+    background-color: #c8ced6;
 }
 
 
