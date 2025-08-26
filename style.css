@@ -115,9 +115,6 @@ button {
 button:hover {
     background-color: #357ABD;
 }
-button:active {
-    background-color: #2A64A5;
-}
 
 
 button[type="submit"] {
