@@ -323,6 +323,24 @@ summary::marker {
     color: var(--primary-color);
 }
 
+#feedback-management-page header {
+    display: flex;         /* 플렉스박스 레이아웃 사용 */
+    align-items: center;   /* 수직 가운데 정렬 */
+    width: 100%;
+    gap: 16px;             /* 요소들 사이의 간격 */
+}
+
+#feedback-page-title {
+    flex-grow: 1; /* 이 부분이 핵심입니다: 제목이 남는 공간을 모두 차지하도록 만듭니다 */
+    margin: 0;    /* h1의 기본 마진 제거 */
+    font-size: 20px; /* 폰트 크기 지정 */
+    text-align: left; /* 왼쪽 정렬 */
+}
+
+#back-to-students {
+    flex-shrink: 0; /* 공간이 부족해도 버튼 크기가 줄어들지 않도록 설정 */
+}
+
 .feedback-item {
     padding: 10px;
     border-radius: 6px;
