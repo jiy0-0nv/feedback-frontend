@@ -25,6 +25,7 @@ body {
     background-color: var(--background-color);
     color: var(--text-color);
     line-height: 1.6;
+    overflow-x: hidden;
 }
 
 #app {
@@ -131,14 +132,67 @@ button[type="submit"] {
 }
 
 .sidebar {
-    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh; /* 전체 높이 */
+    width: 250px; /* 사이드바 너비 */
     background-color: var(--card-bg-color);
-    padding: 16px;
+    padding: 24px;
     border-right: 1px solid var(--border-color);
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    box-shadow: 4px 0px 15px rgba(0,0,0,0.1);
     justify-content: space-between;
     align-items: center;
+    transform: translateX(-100%); /* 기본적으로 화면 왼쪽 밖에 숨김 */
+    transition: transform 0.3s ease-in-out; /* 부드러운 애니메이션 */
+    z-index: 1002; /* 다른 요소들보다 위에 있도록 */
+}
+
+.sidebar.open {
+    transform: translateX(0); /* open 클래스가 추가되면 원래 위치로 */
+}
+
+#sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1001;
+    display: none; /* 기본적으로 숨김 */
+}
+
+#sidebar-overlay.active {
+    display: block; /* active 클래스가 추가되면 보이도록 */
+}
+
+#user-profile {
+    margin-bottom: auto; /* 로그아웃 버튼을 맨 아래로 밀어냄 */
+}
+
+#user-profile h2 {
+    color: var(--primary-color);
+    margin-bottom: 5px;
+}
+
+#user-profile p {
+    color: var(--light-text-color);
+    font-size: 14px;
+    word-break: break-all;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: var(--light-text-color);
 }
 
 .sidebar h2 {
@@ -149,8 +203,8 @@ button[type="submit"] {
 
 #logout-btn {
     background-color: var(--danger-color);
- padding: 8px 12px;
- font-size: 14px;
+    padding: 8px 12px;
+    font-size: 14px;
 }
 #logout-btn:hover {
     background-color: #c82333;
@@ -158,9 +212,10 @@ button[type="submit"] {
 
 
 #content-area {
-    flex: 1;
+    width: 100%;
     padding: 16px;
     overflow-y: auto;
+    transition: margin-left 0.3s ease-in-out;
 }
 
 #content-area header {
@@ -168,6 +223,15 @@ button[type="submit"] {
     align-items: center;
     gap: 8px;
     margin-bottom: 16px;
+}
+
+#menu-btn, #menu-btn-feedback {
+    background: none;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-size: 20px;
+    cursor: pointer;
 }
 
 #back-to-students {

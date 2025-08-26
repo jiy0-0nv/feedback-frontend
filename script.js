@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 상태 관리 ---
     const state = {
         token: localStorage.getItem('token'),
+        currentUser: JSON.parse(localStorage.getItem('currentUser')),
         currentPage: 'auth', // 'auth', 'students', 'feedback'
         selectedStudentId: null,
         selectedStudentName: null,
@@ -56,6 +57,10 @@ document.addEventListener('DOMContentLoaded', () => {
             return this._request('post', 'api/v1/auth/token', { username: email, password }, true);
         }
 
+        getUserInfo() {
+            return this._request('get', 'api/v1/teachers/me');
+        }
+
         getGrades() {
             return this._request('get', 'api/v1/grades');
         }
@@ -95,6 +100,11 @@ document.addEventListener('DOMContentLoaded', () => {
         feedback: document.getElementById('feedback-management-page'),
     };
     const loadingSpinner = document.getElementById('loading-spinner');
+    const sidebar = document.getElementById('sidebar');
+    const sidebarOverlay = document.getElementById('sidebar-overlay');
+    const menuBtns = document.querySelectorAll('#menu-btn, #menu-btn-feedback');
+    const closeSidebarBtn = document.getElementById('close-sidebar-btn');
+    const userProfileDiv = document.getElementById('user-profile');
 
     // --- 라우팅 및 페이지 렌더링 ---
     function navigate(page) {
@@ -108,7 +118,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('content-area').querySelectorAll('.content-page').forEach(p => p.style.display = 'none');
 
         if (state.token) {
-            pages.main.style.display = 'flex';
+            renderSidebar();
+            pages.main.style.display = 'block'; 
             if (state.currentPage === 'students') {
                 pages.students.style.display = 'block';
                 await renderStudentManagementPage();
@@ -119,6 +130,17 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             pages.auth.style.display = 'block';
             state.currentPage = 'auth';
+        }
+    }
+
+    function renderSidebar() {
+        if (state.currentUser) {
+            userProfileDiv.innerHTML = `
+                <h2>${state.currentUser.name}님, 환영합니다!</h2>
+                <p>${state.currentUser.email}</p>
+            `;
+        } else {
+            userProfileDiv.innerHTML = '<h2>안녕하세요!</h2>';
         }
     }
 
@@ -250,6 +272,10 @@ document.addEventListener('DOMContentLoaded', () => {
         loadingSpinner.style.display = show ? 'flex' : 'none';
     }
 
+    function openSidebar() {
+        sidebar.classList.add('open');
+        sidebarOverlay.classList.add('active');
+    }
 
     // --- 이벤트 리스너 ---
     
@@ -276,6 +302,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (response && response.access_token) {
             state.token = response.access_token;
             localStorage.setItem('token', state.token);
+
+            const userInfo = await api.getUserInfo();
+            if (userInfo) {
+                state.currentUser = userInfo;
+                localStorage.setItem('currentUser', JSON.stringify(userInfo));
+            }
+
             showToast('로그인 성공!');
             navigate('students');
         } else {
@@ -301,10 +334,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // 로그아웃
     document.getElementById('logout-btn').addEventListener('click', () => {
         state.token = null;
+        state.currentUser = null;
         localStorage.removeItem('token');
+        localStorage.removeItem('currentUser');
         showToast('로그아웃 되었습니다.');
         navigate('auth');
     });
+
+    // 사이드바 제어 이벤트 리스너
+    menuBtns.forEach(btn => btn.addEventListener('click', openSidebar));
+    closeSidebarBtn.addEventListener('click', closeSidebar);
+    sidebarOverlay.addEventListener('click', closeSidebar);
 
     // 신규 학생 추가
     document.getElementById('new-student-form').addEventListener('submit', async (e) => {
@@ -414,6 +454,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 앱 초기화 ---
     function initialize() {
         if (state.token) {
+            renderSidebar();
             navigate('students');
         } else {
             navigate('auth');

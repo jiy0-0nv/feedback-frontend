@@ -36,13 +36,18 @@
         </div>
 
         <div id="main-page" class="page" style="display: none;">
-            <aside class="sidebar">
-                <h2>안녕하세요!</h2>
+            <aside class="sidebar" id="sidebar">
+                <div id="user-profile">
+                    </div>
                 <button id="logout-btn">로그아웃</button>
+                <button class="close-btn" id="close-sidebar-btn">&times;</button>
             </aside>
+            <div id="sidebar-overlay"></div>
+
             <main id="content-area">
                 <div id="student-management-page" class="content-page">
                     <header>
+                        <button id="menu-btn">☰</button>
                         <h1>학생 관리</h1>
                     </header>
                     <details class="expander">
@@ -61,6 +66,7 @@
                 <div id="feedback-management-page" class="content-page" style="display: none;">
                     <header>
                         <button id="back-to-students">◀ 학생 목록으로 돌아가기</button>
+                        <button id="menu-btn-feedback">☰</button>
                         <h1 id="feedback-page-title"></h1>
                     </header>
                     <details class="expander">
